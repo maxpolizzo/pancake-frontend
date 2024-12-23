@@ -16,6 +16,8 @@ import {
   ethereumTokens,
   lineaTestnetTokens,
   lineaTokens,
+  neonEVMTokens,
+  neonEVMDevnetTokens,
   opBnbTestnetTokens,
   opBnbTokens,
   polygonZkEvmTestnetTokens,
@@ -72,6 +74,7 @@ export const V2_ROUTER_ADDRESS: ChainMap<string> = {
   [ChainId.SEPOLIA]: '0x8cFe327CEc66d1C090Dd72bd0FF11d690C33a2Eb',
   [ChainId.ARBITRUM_SEPOLIA]: '0x8cFe327CEc66d1C090Dd72bd0FF11d690C33a2Eb',
   [ChainId.BASE_SEPOLIA]: '0x8cFe327CEc66d1C090Dd72bd0FF11d690C33a2Eb',
+  [ChainId.NEON_EVM_DEVNET]: '0x41207F05fa41fbdcBF756bf75d3da342062760d8',
 }
 
 export const STABLE_SWAP_INFO_ADDRESS: ChainMap<string> = {
@@ -127,6 +130,8 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [ChainId.SEPOLIA]: [sepoliaTokens.usdc, sepoliaTokens.weth],
   [ChainId.ARBITRUM_SEPOLIA]: [arbSepoliaTokens.usdc, arbSepoliaTokens.weth],
   [ChainId.BASE_SEPOLIA]: [baseSepoliaTokens.usdc, baseSepoliaTokens.weth],
+  [ChainId.NEON_EVM]: [neonEVMTokens.usdc, neonEVMTokens.weth],
+  [ChainId.NEON_EVM_DEVNET]: [neonEVMDevnetTokens.usdc, neonEVMDevnetTokens.weth],
 }
 
 const czusd = new ERC20Token(ChainId.BSC, '0xE68b79e51bf826534Ff37AA9CeE71a3842ee9c70', 18, 'CZUSD', 'CZUSD')

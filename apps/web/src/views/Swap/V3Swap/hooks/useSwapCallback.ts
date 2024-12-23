@@ -62,6 +62,8 @@ export function useSwapCallback({
     feeOptions,
   )
 
+  console.log(swapCalls, 'swapCalls')
+
   const { callback } = useSendSwapTransaction(account, chainId, trade ?? undefined, swapCalls, 'UniversalRouter')
 
   return useMemo(() => {

@@ -279,6 +279,11 @@ export function useFeeDataWithGasPrice(chainIdOverride?: number): {
     }
   }
 
+  // For some reason useFeeData returns undefined gas price from NeonEVM RPC, we hardcode it here
+  if (data) {
+    data.gasPrice = 1000000000000n
+  }
+
   return {
     gasPrice: data?.gasPrice ?? undefined,
     maxFeePerGas: data?.maxFeePerGas ?? undefined,

@@ -13,6 +13,8 @@ import {
   goerliTestnetTokens,
   lineaTestnetTokens,
   lineaTokens,
+  neonEVMTokens,
+  neonEVMDevnetTokens,
   opBnbTestnetTokens,
   opBnbTokens,
   polygonZkEvmTestnetTokens,
@@ -43,6 +45,8 @@ export const usdGasTokensByChain = {
   [ChainId.SEPOLIA]: [scrollSepoliaTokens.usdc],
   [ChainId.ARBITRUM_SEPOLIA]: [arbSepoliaTokens.usdc],
   [ChainId.BASE_SEPOLIA]: [baseSepoliaTokens.usdc],
+  [ChainId.NEON_EVM]: [neonEVMTokens.usdc],
+  [ChainId.NEON_EVM_DEVNET]: [neonEVMDevnetTokens.usdc],
 } satisfies Record<ChainId, Token[]>
 
 export * from './stableSwap'

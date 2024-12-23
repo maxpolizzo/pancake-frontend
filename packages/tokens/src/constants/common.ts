@@ -357,6 +357,22 @@ export const USDC = {
     'USD Coin',
     'https://www.centre.io/usdc',
   ),
+  [ChainId.NEON_EVM]: new ERC20Token(
+    ChainId.NEON_EVM,
+    '0xEA6B04272f9f62F997F666F07D3a974134f7FFb9',
+    6,
+    'USDC',
+    'USD Coin',
+    'https://www.centre.io/usdc',
+  ),
+  [ChainId.NEON_EVM_DEVNET]: new ERC20Token(
+    ChainId.NEON_EVM_DEVNET,
+    '0x512E48836Cd42F3eB6f50CEd9ffD81E0a7F15103',
+    6,
+    'USDC',
+    'USD Coin',
+    'https://www.centre.io/usdc',
+  ),
 }
 
 export const USDT = {
@@ -421,6 +437,22 @@ export const USDT = {
   [ChainId.BASE]: new ERC20Token(
     ChainId.BASE,
     '0xfde4C96c8593536E31F229EA8f37b2ADa2699bb2',
+    6,
+    'USDT',
+    'Tether USDT',
+    'https://tether.to/',
+  ),
+  [ChainId.NEON_EVM]: new ERC20Token(
+    ChainId.NEON_EVM,
+    '0x5f0155d08eF4aaE2B500AefB64A3419dA8bB611a',
+    6,
+    'USDT',
+    'Tether USDT',
+    'https://tether.to/',
+  ),
+  [ChainId.NEON_EVM_DEVNET]: new ERC20Token(
+    ChainId.NEON_EVM_DEVNET,
+    '0x6eEf939FC6e2B3F440dCbB72Ea81Cd63B5a519A5',
     6,
     'USDT',
     'Tether USDT',
@@ -517,4 +549,6 @@ export const STABLE_COIN = {
   [ChainId.SEPOLIA]: USDC[ChainId.SEPOLIA],
   [ChainId.ARBITRUM_SEPOLIA]: USDC[ChainId.ARBITRUM_SEPOLIA],
   [ChainId.BASE_SEPOLIA]: USDC[ChainId.BASE_SEPOLIA],
+  [ChainId.NEON_EVM]: USDC[ChainId.NEON_EVM],
+  [ChainId.NEON_EVM_DEVNET]: USDC[ChainId.NEON_EVM_DEVNET],
 } satisfies Record<ChainId, ERC20Token>

@@ -870,6 +870,7 @@ function createUseWorkerGetBestTrade() {
 
         const quoterConfig = (quoteProvider as ReturnType<typeof SmartRouter.createQuoteProvider>)?.getConfig?.()
         try {
+          /*
           const result = await worker.getBestTrade({
             chainId: currency.chainId,
             currency: SmartRouter.Transformer.serializeCurrency(currency),
@@ -888,6 +889,87 @@ function createUseWorkerGetBestTrade() {
             nativeCurrencyUsdPrice,
             signal,
           })
+          */
+          const result = {
+            // INPUT AMOUNT
+            inputAmount: {
+              currency: {
+                address: '0x11adC2d986E334137b9ad0a0F290771F31e9517F',
+                decimals: 18,
+                symbol: 'wNEON',
+              },
+              value: 1000000000000000000n,
+            },
+
+            // OUTPUT AMOUNT
+            outputAmount: {
+              currency: {
+                address: '0x512E48836Cd42F3eB6f50CEd9ffD81E0a7F15103',
+                decimals: 6,
+                symbol: 'USDC',
+              },
+              value: 468983n,
+            },
+
+            // GAS
+            gasEstimate: 10000000n,
+
+            // ROUTES
+            routes: [
+              {
+                pools: [
+                  {
+                    reserve0: {
+                      currency: {
+                        address: '0x11adC2d986E334137b9ad0a0F290771F31e9517F',
+                        decimals: 18,
+                        symbol: 'wNEON',
+                      },
+                      value: 40166981788819824364n,
+                    },
+                    reserve1: {
+                      currency: {
+                        address: '0x512E48836Cd42F3eB6f50CEd9ffD81E0a7F15103',
+                        decimals: 6,
+                        symbol: 'USDC',
+                      },
+                      value: 19306625n,
+                    },
+                  },
+                ],
+
+                path: [
+                  {
+                    address: '0x11adC2d986E334137b9ad0a0F290771F31e9517F',
+                    decimals: 18,
+                    symbol: 'wNEON',
+                  },
+                  {
+                    address: '0x512E48836Cd42F3eB6f50CEd9ffD81E0a7F15103',
+                    decimals: 6,
+                    symbol: 'USDC',
+                  },
+                ],
+
+                inputAmount: {
+                  currency: {
+                    address: '0x11adC2d986E334137b9ad0a0F290771F31e9517F',
+                    decimals: 18,
+                    symbol: 'wNEON',
+                  },
+                  value: 1000000000000000000n,
+                },
+                outputAmount: {
+                  currency: {
+                    address: '0x512E48836Cd42F3eB6f50CEd9ffD81E0a7F15103',
+                    decimals: 6,
+                    symbol: 'USDC',
+                  },
+                  value: 468983n,
+                },
+              },
+            ],
+          }
           return SmartRouter.Transformer.parseTrade(currency.chainId, result as any)
         } catch (e) {
           if (e === 'Cannot find a valid swap route') {

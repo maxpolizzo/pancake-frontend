@@ -76,6 +76,7 @@
     "@pancakeswap/uikit": "workspace:*",
     "@pancakeswap/universal-router-sdk": "workspace:*",
     "@pancakeswap/utils": "workspace:*",
+    "@pancakeswap/v2-sdk": "workspace:*",
     "@pancakeswap/v3-sdk": "workspace:*",
     "@pancakeswap/wagmi": "workspace:*",
     "@pancakeswap/widgets-internal": "workspace:*",

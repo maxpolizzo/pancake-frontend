@@ -167,6 +167,22 @@ export const WETH9 = {
     'Wrapped Ether',
     'https://weth.io',
   ),
+  [ChainId.NEON_EVM]: new ERC20Token(
+    ChainId.NEON_EVM,
+    '0x202C35e517Fa803B537565c40F0a6965D7204609',
+    18,
+    'wNEON',
+    'Wrapped Neon',
+    'https://neonevm.org/',
+  ),
+  [ChainId.NEON_EVM_DEVNET]: new ERC20Token(
+    ChainId.NEON_EVM_DEVNET,
+    '0x11adC2d986E334137b9ad0a0F290771F31e9517F',
+    18,
+    'wNEON',
+    'Wrapped Neon',
+    'https://neonevm.org/',
+  ),
 }
 
 export const WBNB = {
@@ -233,6 +249,8 @@ export const WNATIVE = {
   [ChainId.SEPOLIA]: WETH9[ChainId.SEPOLIA],
   [ChainId.ARBITRUM_SEPOLIA]: WETH9[ChainId.ARBITRUM_SEPOLIA],
   [ChainId.BASE_SEPOLIA]: WETH9[ChainId.BASE_SEPOLIA],
+  [ChainId.NEON_EVM]: WETH9[ChainId.NEON_EVM],
+  [ChainId.NEON_EVM_DEVNET]: WETH9[ChainId.NEON_EVM_DEVNET],
 } satisfies Record<ChainId, ERC20Token>
 
 const ETHER = { name: 'Ether', symbol: 'ETH', decimals: 18 } as const
@@ -286,6 +304,16 @@ export const NATIVE = {
   [ChainId.BASE_SEPOLIA]: {
     name: 'Sepolia Ether',
     symbol: 'ETH',
+    decimals: 18,
+  },
+  [ChainId.NEON_EVM]: {
+    name: 'Neon',
+    symbol: 'NEON',
+    decimals: 18,
+  },
+  [ChainId.NEON_EVM_DEVNET]: {
+    name: 'Neon',
+    symbol: 'NEON',
     decimals: 18,
   },
 } satisfies Record<

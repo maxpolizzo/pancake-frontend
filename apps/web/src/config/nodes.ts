@@ -159,4 +159,14 @@ export const PUBLIC_NODES: Record<ChainId, string[] | readonly string[]> = {
   [ChainId.SEPOLIA]: sepolia.rpcUrls.default.http,
   [ChainId.ARBITRUM_SEPOLIA]: arbitrumSepolia.rpcUrls.default.http,
   [ChainId.BASE_SEPOLIA]: baseSepolia.rpcUrls.default.http,
+  [ChainId.NEON_EVM]: [
+    'https://neon-proxy-mainnet.solana.p2p.org',
+    'https://neon-evm.drpc.org',
+    'https://neon-mainnet.everstake.one',
+    'https://node.histori.xyz/neon-mainnet/8ry9f6t9dct1se2hlagxnd9n2a',
+  ],
+  [ChainId.NEON_EVM_DEVNET]: [
+    'https://devnet.neonevm.org',
+    // 'https://neon-evm-devnet.drpc.org'
+  ],
 } satisfies Record<ChainId, readonly string[]>

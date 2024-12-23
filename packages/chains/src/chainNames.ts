@@ -21,6 +21,8 @@ export const chainNames: Record<ChainId, string> = {
   [ChainId.SEPOLIA]: 'sepolia',
   [ChainId.ARBITRUM_SEPOLIA]: 'arbSepolia',
   [ChainId.BASE_SEPOLIA]: 'baseSepolia',
+  [ChainId.NEON_EVM]: 'neonEVM',
+  [ChainId.NEON_EVM_DEVNET]: 'neonEVMDevnet',
 }
 
 export const chainNamesInKebabCase = {
@@ -44,6 +46,8 @@ export const chainNamesInKebabCase = {
   [ChainId.SEPOLIA]: 'sepolia',
   [ChainId.ARBITRUM_SEPOLIA]: 'arbitrum-sepolia',
   [ChainId.BASE_SEPOLIA]: 'base-sepolia',
+  [ChainId.NEON_EVM]: 'neon-evm',
+  [ChainId.NEON_EVM_DEVNET]: 'neon-evm-devnet',
 } as const
 
 export const mainnetChainNamesInKebabCase = {
@@ -66,6 +70,7 @@ export const mainnetChainNamesInKebabCase = {
   [ChainId.SEPOLIA]: 'ethereum',
   [ChainId.ARBITRUM_SEPOLIA]: 'arbitrum',
   [ChainId.BASE_SEPOLIA]: 'base',
+  [ChainId.NEON_EVM]: 'neon-evm',
 } as const
 
 export const chainNameToChainId = Object.entries(chainNames).reduce((acc, [chainId, chainName]) => {

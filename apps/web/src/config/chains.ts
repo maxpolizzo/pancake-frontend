@@ -23,6 +23,60 @@ import {
   zkSync,
 } from 'wagmi/chains'
 
+export const neonEvm: Chain = {
+  id: 245022934,
+  name: 'Neon EVM',
+  network: 'neonEvm',
+  nodeUrls: {
+    default: 'https://neon-proxy-mainnet.solana.p2p.org',
+  },
+  rpcUrls: {
+    default: {
+      http: ['https://neon-evm.drpc.org'],
+      webSocket: ['wss://neon-evm.drpc.org'],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: 'Neon Explorer',
+      url: 'https://neonscan.org/',
+    },
+    traceMove: {
+      name: '',
+      url: '',
+    },
+  },
+  testnet: false,
+  faucetUrl: 'https://neonfaucet.org/',
+}
+
+export const neonEvmDevnet: Chain = {
+  id: 245022926,
+  name: 'Neon EVM (devnet)',
+  network: 'neonEvmDevnet',
+  nodeUrls: {
+    default: 'https://devnet.neonevm.org',
+  },
+  rpcUrls: {
+    default: {
+      http: ['https://devnet.neonevm.org'],
+      webSocket: ['wss://devnet.neonevm.org'],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: 'Neon Devnet Explorer',
+      url: 'https://devnet.neonscan.org/',
+    },
+    traceMove: {
+      name: '',
+      url: '',
+    },
+  },
+  testnet: true,
+  faucetUrl: 'https://neonfaucet.org/',
+}
+
 export const CHAIN_QUERY_NAME = chainNames
 
 const CHAIN_QUERY_NAME_TO_ID = Object.entries(CHAIN_QUERY_NAME).reduce((acc, [chainId, chainName]) => {
@@ -74,11 +128,14 @@ export const L2_CHAIN_IDS: ChainId[] = [
 ]
 
 export const CHAINS: [Chain, ...Chain[]] = [
+  neonEvm,
+  neonEvmDevnet,
   bsc,
   bscTestnet,
   mainnet,
   goerli,
   sepolia,
+  /*
   polygonZkEvm,
   polygonZkEvmTestnet,
   zkSync,
@@ -93,4 +150,5 @@ export const CHAINS: [Chain, ...Chain[]] = [
   opBNB,
   opBNBTestnet,
   scrollSepolia,
+  */
 ]

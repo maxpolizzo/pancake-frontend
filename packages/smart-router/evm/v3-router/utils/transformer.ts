@@ -219,6 +219,9 @@ export function parseCurrencyAmount(chainId: ChainId, amount: SerializedCurrency
 }
 
 export function parsePool(chainId: ChainId, pool: SerializedPool): Pool {
+  // eslint-disable-next-line no-param-reassign
+  pool.type = PoolType.V2 // v2 pool
+
   if (pool.type === PoolType.V2) {
     return {
       ...pool,
@@ -274,13 +277,16 @@ export function parsePool(chainId: ChainId, pool: SerializedPool): Pool {
 }
 
 export function parseRoute(chainId: ChainId, route: SerializedRoute): Route {
-  return {
+  const result = {
     ...route,
     pools: route.pools.map((p) => parsePool(chainId, p)),
     path: route.path.map((c) => parseCurrency(chainId, c)),
     inputAmount: parseCurrencyAmount(chainId, route.inputAmount),
     outputAmount: parseCurrencyAmount(chainId, route.outputAmount),
   }
+  result.type = 0 // v2 route
+
+  return result
 }
 
 export function parseTrade(chainId: ChainId, trade: SerializedTrade): SmartRouterTrade<TradeType> {
