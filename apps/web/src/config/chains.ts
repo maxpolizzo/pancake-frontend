@@ -26,7 +26,6 @@ import {
 export const neonEvm: Chain = {
   id: 245022934,
   name: 'Neon EVM',
-  network: 'neonEvm',
   nodeUrls: {
     default: 'https://neon-proxy-mainnet.solana.p2p.org',
   },
@@ -46,6 +45,14 @@ export const neonEvm: Chain = {
       url: '',
     },
   },
+  /*
+  contracts: {
+    multicall3: {
+      address: '',
+      blockCreated: ,
+    },
+  },
+  */
   testnet: false,
   faucetUrl: 'https://neonfaucet.org/',
 }
@@ -71,6 +78,12 @@ export const neonEvmDevnet: Chain = {
     traceMove: {
       name: '',
       url: '',
+    },
+  },
+  contracts: {
+    multicall3: {
+      address: '0x882f3993c8b031dB0c6B38402a2473E626EFfc7D',
+      blockCreated: 348038864,
     },
   },
   testnet: true,

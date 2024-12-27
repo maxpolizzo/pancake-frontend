@@ -179,7 +179,8 @@ addEventListener('message', (event: MessageEvent<WorkerEvent>) => {
 
     SmartRouter.getBestTrade(currencyAAmount, currencyB, tradeType, {
       gasPriceWei: gasPrice,
-      poolProvider: SmartRouter.createStaticPoolProvider(pools),
+      // poolProvider: SmartRouter.createStaticPoolProvider(pools),
+      poolProvider: SmartRouter.createHybridPoolProvider(onChainProvider),
       quoteProvider: onChainQuoteProvider,
       maxHops,
       maxSplits,

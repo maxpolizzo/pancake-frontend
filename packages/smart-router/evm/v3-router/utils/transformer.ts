@@ -277,16 +277,14 @@ export function parsePool(chainId: ChainId, pool: SerializedPool): Pool {
 }
 
 export function parseRoute(chainId: ChainId, route: SerializedRoute): Route {
-  const result = {
+  return {
     ...route,
     pools: route.pools.map((p) => parsePool(chainId, p)),
     path: route.path.map((c) => parseCurrency(chainId, c)),
     inputAmount: parseCurrencyAmount(chainId, route.inputAmount),
     outputAmount: parseCurrencyAmount(chainId, route.outputAmount),
+    type: 0, // v2 route
   }
-  result.type = 0 // v2 route
-
-  return result
 }
 
 export function parseTrade(chainId: ChainId, trade: SerializedTrade): SmartRouterTrade<TradeType> {

@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Percent, Price } from '@pancakeswap/sdk'
 import {
-  PancakeSwapUniversalRouter,
+  // PancakeSwapUniversalRouter,
   Permit2Signature,
   getUniversalRouterAddress,
 } from '@pancakeswap/universal-router-sdk'
+import { SmartRouter } from '@pancakeswap/smart-router'
 import { Router, Trade, Pair, pancakeRouterV2ABI } from '@pancakeswap/v2-sdk'
 import { FeeOptions } from '@pancakeswap/v3-sdk'
 import { useMemo } from 'react'
@@ -61,17 +62,36 @@ export function useSwapCallArguments(
       deadlineOrPreviousBlockhash: deadline?.toString(),
     })
     */
-    // Format v2 swap call data from v4 trade
+
+    // Format v2 swap call data
     const v2Route: any = trade.routes[0]
-    v2Route.input = v2Route.inputAmount.currency
-    v2Route.output = v2Route.outputAmount.currency
-    v2Route.pairs = [new Pair(v2Route.inputAmount, v2Route.outputAmount)]
-    const midPrice = v2Route.pools[0].reserve0.divide(v2Route.pools[0].reserve1)
-    v2Route.midPrice = new Price(v2Route.input, v2Route.output, midPrice.denominator, midPrice.numerator)
 
-    const v2Trade = new Trade(v2Route, trade.inputAmount, 0)
+    v2Route.input = trade.inputAmount.wrapped.currency
+    v2Route.output = trade.outputAmount.wrapped.currency
+    v2Route.inputAmount = trade.inputAmount.wrapped
+    v2Route.outputAmount = trade.outputAmount.wrapped
 
-    console.log(v2Trade, 'v2Trade')
+    for (let i = 0; i < v2Route.path.length; i++) {
+      if (v2Route.path[i].isNative) {
+        v2Route.path[i] = v2Route.path[i].wrapped
+      }
+    }
+
+    v2Route.pairs = []
+    // eslint-disable-next-line no-unused-expressions
+    v2Route.pools[0].reserve0.currency.wrapped.currency === trade.inputAmount.wrapped.currency
+      ? v2Route.pairs.push(new Pair(v2Route.pools[0].reserve0.wrapped, v2Route.pools[0].reserve1.wrapped))
+      : v2Route.pairs.push(new Pair(v2Route.pools[0].reserve1.wrapped, v2Route.pools[0].reserve0.wrapped))
+    if (v2Route.pools.length === 2) {
+      // eslint-disable-next-line no-unused-expressions
+      v2Route.pools[1].reserve0.currency.wrapped.currency === trade.outputAmount.wrapped.currency
+        ? v2Route.pairs.push(new Pair(v2Route.pools[0].reserve1.wrapped, v2Route.pools[0].reserve0.wrapped))
+        : v2Route.pairs.push(new Pair(v2Route.pools[0].reserve0.wrapped, v2Route.pools[0].reserve1.wrapped))
+    }
+
+    v2Route.midPrice = SmartRouter.getMidPrice(v2Route)
+
+    const v2Trade = new Trade(v2Route, trade.inputAmount.wrapped, 0)
 
     const v2methodParameters = Router.swapCallParameters(v2Trade, {
       ttl: 10000,
@@ -84,8 +104,6 @@ export function useSwapCallArguments(
       args: v2methodParameters.args,
       functionName: 'swapExactTokensForTokens',
     })
-
-    console.log(calldata, 'calldata')
 
     const swapRouterAddress = getUniversalRouterAddress(chainId)
     if (!swapRouterAddress) return []

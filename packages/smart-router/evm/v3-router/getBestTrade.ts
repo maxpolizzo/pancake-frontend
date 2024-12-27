@@ -88,6 +88,7 @@ async function getBestRoutes(
     quoteCurrencyUsdPrice,
     nativeCurrencyUsdPrice,
   })
+
   const routesWithValidQuote = await getRoutesWithValidQuote({
     amount,
     baseRoutes,
@@ -99,6 +100,7 @@ async function getBestRoutes(
     quoterOptimization,
     signal,
   })
+
   // routesWithValidQuote.forEach(({ percent, path, amount: a, quote }) => {
   //   const pathStr = path.map((t) => t.symbol).join('->')
   //   console.log(

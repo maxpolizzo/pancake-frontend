@@ -8,7 +8,7 @@ import { getPoolAddress, logger } from '../../utils'
 import { CommonTokenPriceProvider, getCommonTokenPrices as defaultGetCommonTokenPrices } from '../getCommonTokenPrices'
 import { getV2PoolsOnChain } from './onChainPoolProviders'
 import { v2PoolTvlSelector } from './poolTvlSelectors'
-import { getV2PoolSubgraph } from './subgraphPoolProviders'
+// import { getV2PoolSubgraph } from './subgraphPoolProviders'
 
 export type GetV2PoolsParams = {
   currencyA?: Currency
@@ -25,7 +25,7 @@ type SubgraphProviders = {
   v3SubgraphProvider?: SubgraphProvider
 }
 
-type Params = GetV2PoolsParams & SubgraphProviders
+type Params = GetV2PoolsParams // & SubgraphProviders
 
 export function createV2PoolsProviderByCommonTokenPrices<T = any>(getCommonTokenPrices: CommonTokenPriceProvider<T>) {
   return async function getV2Pools({
@@ -84,7 +84,7 @@ export function createV2PoolsProviderByCommonTokenPrices<T = any>(getCommonToken
 }
 
 export const getV2PoolsWithTvlByCommonTokenPrices = createV2PoolsProviderByCommonTokenPrices<{
-  v3SubgraphProvider?: SubgraphProvider
+  // v3SubgraphProvider?: SubgraphProvider
 }>(defaultGetCommonTokenPrices)
 
 type GetV2Pools<T = any> = (params: GetV2PoolsParams & T) => Promise<V2PoolWithTvl[]>
@@ -104,9 +104,11 @@ export function createGetV2CandidatePools<T = any>(
 
 export async function getV2CandidatePools(params: Params) {
   const fallbacks: GetV2Pools[] = [
-    async ({ pairs: providedPairs, currencyA, currencyB, v2SubgraphProvider }) => {
+    // async ({ pairs: providedPairs, currencyA, currencyB, v2SubgraphProvider }) => {
+    async ({ pairs: providedPairs, currencyA, currencyB, onChainProvider }) => {
       const pairs = providedPairs || (await getPairCombinations(currencyA, currencyB))
-      return getV2PoolSubgraph({ provider: v2SubgraphProvider, pairs })
+      // return getV2PoolSubgraph({ provider: v2SubgraphProvider, pairs })
+      return getV2PoolsWithTvlByCommonTokenPrices({ currencyA, currencyB, pairs, onChainProvider })
     },
   ]
   const getV2PoolsWithFallbacks = createGetV2CandidatePools<SubgraphProviders>(getV2PoolsWithTvlByCommonTokenPrices, {

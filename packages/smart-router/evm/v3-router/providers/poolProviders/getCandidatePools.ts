@@ -1,7 +1,7 @@
 import { BigintIsh, Currency } from '@pancakeswap/sdk'
 
 import { OnChainProvider, Pool, PoolType, SubgraphProvider } from '../../types'
-import { getV2CandidatePools } from './getV2CandidatePools'
+import { getV2CandidatePools, getV2PoolsWithTvlByCommonTokenPrices } from './getV2CandidatePools'
 import { getV3CandidatePools } from './getV3CandidatePools'
 import { getStableCandidatePools } from './getStableCandidatePools'
 
@@ -21,6 +21,7 @@ export type GetCandidatePoolsParams = {
 
 export async function getCandidatePools({
   protocols = [PoolType.V3, PoolType.V2, PoolType.STABLE],
+  onChainProvider,
   v2SubgraphProvider,
   v3SubgraphProvider,
   ...rest
@@ -32,19 +33,29 @@ export async function getCandidatePools({
   }
 
   const poolSets = await Promise.all(
+    // eslint-disable-next-line array-callback-return,consistent-return
     protocols.map((protocol) => {
       if (protocol === PoolType.V2) {
-        return getV2CandidatePools({ ...rest, v2SubgraphProvider, v3SubgraphProvider })
+        // return getV2CandidatePools({ ...rest, v2SubgraphProvider, v3SubgraphProvider })
+        return getV2CandidatePools({ ...rest, onChainProvider })
       }
+      /*
       if (protocol === PoolType.V3) {
         return getV3CandidatePools({ ...rest, subgraphProvider: v3SubgraphProvider })
       }
       return getStableCandidatePools(rest)
+      */
     }),
   )
 
-  return poolSets.reduce<Pool[]>((acc, cur) => {
+  /*
+  const result = poolSets.reduce<Pool[]>((acc, cur) => {
     acc.push(...cur)
     return acc
   }, [])
+  return result
+  */
+
+  // @ts-ignore
+  return poolSets[0]
 }
